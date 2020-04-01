@@ -26,6 +26,23 @@ Iteration: 5500 Loss: 0.022057538852095604 Accuracy 96.69
 Iteration: 6000 Loss: 0.09518957138061523 Accuracy 96.49
 ```
 
+### LSTM (Two Layer, 10 epochs, 6000 iteration)
+```
+Iteration: 500 Loss: 2.2945711612701416 Accuracy 13.95
+Iteration: 1000 Loss: 1.8880153894424438 Accuracy 35.69
+Iteration: 1500 Loss: 0.7467953562736511 Accuracy 72.84
+Iteration: 2000 Loss: 0.3882308304309845 Accuracy 85.19
+Iteration: 2500 Loss: 0.32414692640304565 Accuracy 88.57
+Iteration: 3000 Loss: 0.21674056351184845 Accuracy 91.51
+Iteration: 3500 Loss: 0.1000654473900795 Accuracy 91.43
+Iteration: 4000 Loss: 0.14333860576152802 Accuracy 93.82
+Iteration: 4500 Loss: 0.25278937816619873 Accuracy 95.16
+Iteration: 5000 Loss: 0.09642145782709122 Accuracy 96.03
+Iteration: 5500 Loss: 0.03336556255817413 Accuracy 96.99
+Iteration: 6000 Loss: 0.0701429471373558 Accuracy 96.72
+```
+
+
 <!--![Figure_0.png](figures/Figure_0.png)  ![Figure_1.png](figures/Figure_1.png)-->
 
 <!--![Figure_2.png](figures/Figure_2.png) ![Figure_3.png](figures/Figure_3.png)-->
