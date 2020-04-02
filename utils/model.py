@@ -1,5 +1,8 @@
+import logging
 import random
 import string
+
+logging.basicConfig(level=logging.INFO)
 
 import torch
 from torch.nn import CrossEntropyLoss
@@ -47,20 +50,21 @@ def train_model(model, train_ds_loader, test_ds_loader, clip, learning_rate, n_e
             if it % 500 == 0:
                 correct = 0
                 total = 0
-                test_model = model.train(False)
-                for test_images, test_labels in test_ds_loader:
-                    test_images = torch.transpose(test_images.view(-1, SEQ_dim, IN_dim), 0, 1)
+                with torch.no_grad():
 
-                    test_logits = test_model(test_images)
+                    for test_images, test_labels in test_ds_loader:
+                        test_images = torch.transpose(test_images.view(-1, SEQ_dim, IN_dim), 0, 1)
 
-                    _, predicted = torch.max(test_logits, 1)
+                        test_logits = model(test_images)
 
-                    total += test_labels.size(0)
+                        _, predicted = torch.max(test_logits, 1)
 
-                    correct += (predicted == test_labels).sum()
+                        total += test_labels.size(0)
 
-                accuracy = 100 * int(correct) / total
-                print('Iteration: {} Loss: {} Accuracy {}'.format(it, loss.item(), accuracy))
+                        correct += (predicted == test_labels).sum()
+
+                    accuracy = 100 * int(correct) / total
+                    logging.info(msg=f' Iteration: {it} Loss: {loss.item()} Accuracy {accuracy}')
     if save_model:
         torch.save(model.state_dict(), 'weights/model-' + generate_model_name(5) + '.pkl')
 
@@ -73,7 +77,8 @@ def predict_model(model):
 
     test_image = torch.transpose(test_image.view(-1, SEQ_dim, IN_dim), 0, 1)
 
-    logits = model(test_image)
-    _, label_predicted = torch.max(logits, 1)
+    with torch.no_grad():
+        logits = model(test_image)
+        _, label_predicted = torch.max(logits, 1)
 
     display_digit(test_image, label_real, label_predicted)
